@@ -23,7 +23,44 @@ const Login = ({ login , isAuthenticated }) => {
       return <Redirect  to="/dashboard" />
     }
     return (
-        <Fragment>
+      <Fragment>
+        <div className="wrapper">
+          <div className="form-wrapper">
+            <h1 className="large text-primary">Sign In</h1>
+            <form className='form' onSubmit={e => onSubmit(e)}>
+              <div className='form-group'>
+                <input
+                type='email'
+                placeholder='Email Address'
+                name='email'
+                value={email}
+                onChange={e => onChange(e)}
+                required
+                />
+              </div>
+              <div className='form-group'>
+                <input
+                type='password'
+                placeholder='Password'
+                name='password'
+                value={password}
+                onChange={e => onChange(e)}
+                minLength='6'
+                />
+              </div>
+            <input type='submit' className='btn btn-primary' value='Login' />
+            </form>
+            <div className='my-1'>
+            <small>Don't have an account? <Link to='/register'>Sign Up</Link></small>
+          </div> 
+            
+          </div>
+        </div>
+      </Fragment>
+        
+  );
+};
+/*<Fragment>
         <h1 className='large text-primary'>Sign In</h1>
         <p className='lead'>Sign Into Your Account
         </p>
@@ -54,11 +91,9 @@ const Login = ({ login , isAuthenticated }) => {
         <div className='my-1'>
          <p>Don't have an account? <Link to='/register'>Sign Up</Link></p>
         </div> 
-      </Fragment>
-  );
-};
+      </Fragment> */
 
-login.propTypes = {
+Login.propTypes = {
   login: PropTypes.func.isRequired,
   isAuthenticated: PropTypes.bool
 };

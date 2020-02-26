@@ -12,7 +12,7 @@ export const Landing = ({isAuthenticated}) => {
     return (
       <section className='landing'>
             <div className="full-screen-video-wrap">
-              <video src = {Video} autoPlay= "true" loop="true"> </video>
+              <video src = {Video} autoPlay= "1" loop="1"> </video>
             </div>
             <div className='dark-overlay'>
             <div className='landing-inner'>

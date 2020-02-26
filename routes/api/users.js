@@ -13,7 +13,10 @@ const User = require('../../models/User');
 router.post(
     '/' ,
     [
-        check('name', 'Name is required')
+        check('firstname', 'First Name is required')
+            .not()
+            .isEmpty(),
+        check('lastname', 'Last Name is required')
             .not()
             .isEmpty(),
         check('email', 'Please include a valid email') .isEmail(),
@@ -25,7 +28,7 @@ router.post(
         if(!errors.isEmpty()){
             return res.status(400).json({errors: errors.array() });
         }
-        const { name, email, password } = req.body;
+        const { firstname, lastname, email, password } = req.body;
         try{
         // checking if the user exists 
            let user = await User.findOne({email});
@@ -38,9 +41,9 @@ router.post(
                d: 'mm'
 
            })
-
            user = new User({
-               name, 
+               firstname,
+               lastname,
                email,
                avatar,
                password

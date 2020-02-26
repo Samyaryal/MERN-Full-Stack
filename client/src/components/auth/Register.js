@@ -5,10 +5,10 @@ import {setAlert } from '../../actions/alert';
 import {register} from '../../actions/auth';
 import PropTypes from 'prop-types';
 
-
 const Register = ({setAlert, register, isAuthenticated})  => {
     const [formData, setFormData ] = useState({//same as this.setsate and setting the initial phase
-       name: '',
+       firstname: '',
+       lastname: '',
        email: '',
        password: '',
        password2: ''
@@ -24,9 +24,8 @@ const Register = ({setAlert, register, isAuthenticated})  => {
           register({firstname, lastname, email, password});
       }
     };
-    
     if(isAuthenticated) {
-        return <Redirect to = "/dashboard" />
+      return <Redirect to = "/dashboard" />
     }
 
     return ( 
@@ -82,15 +81,16 @@ const Register = ({setAlert, register, isAuthenticated})  => {
             <label htmlFor="confirm-password">Confirm-Password</label>
             <input
               type='password'
-              placeholder='Confirm-Password'
+              placeholder='Confirm Password'
               name='password2'
               value={password2}
               onChange={e => onChange(e)}
             />
             </div>
+            <input type='submit' className='btn btn-primary' value ='Register' />
            </form>
             <div className='my-1'>
-              <button type="submit">Register</button>
+              
               <small>Already Have an Account?<Link to="/login">Sign In</Link></small> 
             </div>
           

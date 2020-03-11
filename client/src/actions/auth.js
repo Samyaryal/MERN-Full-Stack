@@ -1,9 +1,10 @@
 import axios from 'axios';
 import {setAlert } from './alert';
-import {REGISTER_SUCCESS, REGISTER_FAIL, USER_LOADED, AUTH_ERROR, LOGIN_SUCCESS, LOGIN_FAIL, LOGOUT, CLEAR_PROFILE } from './types';
+import {REGISTER_SUCCESS, REGISTER_FAIL, USER_LOADED, AUTH_ERROR, LOGIN_SUCCESS, LOGIN_FAIL, 
+    LOGOUT, CLEAR_PROFILE } from './types';
 import setAuthToken from '../utils/setAuthToken';
 
-
+// Actions Creators
 //load user
 export const loadUser = () => async dispatch =>{
     if(localStorage.token){
@@ -11,7 +12,6 @@ export const loadUser = () => async dispatch =>{
     }
     try {
         const res = await axios.get('/api/auth');
-
         dispatch({
             type: USER_LOADED,
             payload: res.data
@@ -59,7 +59,6 @@ export const login =(email, password) => async dispatch => {
         }
     }
     const body = JSON.stringify({ email, password});
-
     try {
         const res = await axios.post ('/api/auth', body, config);
         dispatch ({
@@ -78,9 +77,7 @@ export const login =(email, password) => async dispatch => {
         });
     }
 };
-
 //logout /clear profile 
-
 export const logout = () => dispatch => {
     dispatch ({type: CLEAR_PROFILE});
     dispatch ({type: LOGOUT});

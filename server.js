@@ -13,16 +13,16 @@ app.get('/', (req, res) => res.send('API running'));
 const userRoute= require('./routes/api/users')
 const authRoute= require('./routes/api/auth')
 const profileRoute= require('./routes/api/profile')
-const postRoute= require('./routes/api/posts')
+
 
 app.use('/api/users',userRoute );
 app.use('/api/auth', authRoute);
 app.use('/api/profile',profileRoute );
-app.use('/api/posts',postRoute);
+// app.use('/api/posts',postRoute);
 
-app.get('*', (req, res) => {
-    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
-});
+// app.get('*', (req, res) => {
+//     res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+// });
 
 
 const PORT = process.env.PORT || 5000;

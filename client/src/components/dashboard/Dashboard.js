@@ -2,17 +2,17 @@ import React, {useEffect, Fragment} from 'react';
 import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import Spinner from '../layout/Spinner';
 import DashboardActions from './DashboardActions';
 import Experience from './Experience';
 import Education from './Education';
 import {getCurrentProfile, deleteAccount} from '../../actions/profile';
 
-const Dashboard = ({ getCurrentProfile, deleteAccount, auth:{user}, profile:{profile, loading} }) => {
+const Dashboard = ({ getCurrentProfile, deleteAccount, auth:{user}, profile:{profile} }) => {
     useEffect(() => {
         getCurrentProfile();
     }, [getCurrentProfile]);
-    return loading && profile === null ?  <Spinner /> : <Fragment>
+    return (
+         <Fragment>
         <h1 className="large tex-primary">Dashboard</h1>
         <p className="lead">
         <i className="fas fa-user"></i>Welcome { user && user.name}</p>
@@ -34,6 +34,7 @@ const Dashboard = ({ getCurrentProfile, deleteAccount, auth:{user}, profile:{pro
                 <Link to="/create-profile" className="btn btn-primary my-1">Create Profile</Link>
             </Fragment>)}
     </Fragment>
+    );
 };
 
 Dashboard.propTypes = {

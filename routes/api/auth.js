@@ -5,10 +5,7 @@ const auth = require('../../middleware/auth');
 const jwt = require('jsonwebtoken');
 const config = require('config');
 const { check, validationResult } = require('express-validator');
-
 const User = require('../../models/User');
-
-
 //GET api/auth
 // Test route
 // Public
@@ -37,16 +34,13 @@ router.post(
         if(!errors.isEmpty()){
             return res.status(400).json({errors: errors.array() });
         }
-        const { email, password } = req.body;
-        
+        const { email, password } = req.body;        
         try{
         // checking if the user exists 
            let user = await User.findOne({email});
            if(!user) {
                return res.status(400).json({ errors: [{msg: 'Invalid Credentials'}] });
-           }
-           
-           
+           }           
            const isMatch = await bcrypt.compare(password, user.password); //plain paswd which user enters, encrypted pswdd which we can get from the user
            if(!isMatch) {
                 return res.status(400).json({ errors: [{msg: 'Invalid Credentials'}]})
@@ -57,7 +51,6 @@ router.post(
                    id: user.id // we dont have to use _.id 
                }
            }
-
            jwt.sign(
                payload, 
                config.get('jwtSecret'),
@@ -70,13 +63,7 @@ router.post(
         } catch (err) {
             console.error(err.message);
             res.status(500).send('Server error');
-
         }
-
-        
-      
     }
 );
-
-
 module.exports = router;

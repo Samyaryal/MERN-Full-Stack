@@ -12,12 +12,8 @@ const EditProfile = ({ profile:{profile, loading}, createProfile, getCurrentProf
 		status: '',
 		skills: '',
 		githubusername: '',
-		bio: '',
-		twitter: '',
-		facebook: '',
-		linkedin: '',
-		youtube: '',
-		instagram: ''
+        bio: '',
+        linkedin:''
 
     });
     const [displaySocialInputs, toggleSocialInputs] = useState(false);
@@ -34,11 +30,7 @@ const EditProfile = ({ profile:{profile, loading}, createProfile, getCurrentProf
             githubusername:
                 loading || !profile.githubusername ? '' : profile.githubusername,
             bio: loading || !profile.bio ? '' : profile.bio,
-            twitter: loading || !profile.social ? '' : profile.social.twitter,
-            facebook: loading || !profile.social ? '' : profile.social.facebook,
-            linkedin: loading || !profile.social ? '' : profile.social.linkedin,
-            youtube: loading || !profile.social ? '' : profile.social.youtube,
-            instagram: loading || !profile.social ? '' : profile.social.instagram
+            linkedin: loading || !profile.linkedin ? '':profile.linkedin
         });
     }, [loading, getCurrentProfile] );
 
@@ -49,12 +41,8 @@ const EditProfile = ({ profile:{profile, loading}, createProfile, getCurrentProf
 		status,
 		skills,
 		githubusername,
-		bio,
-		twitter,
-		facebook,
-		linkedin,
-		youtube,
-		instagram
+        bio,
+        linkedin
     } = formData;
 
     const onChange = e => setFormData({...formData, [e.target.name]: e.target.value});
@@ -170,37 +158,7 @@ const EditProfile = ({ profile:{profile, loading}, createProfile, getCurrentProf
             </div>
             {displaySocialInputs && (
                 <Fragment>
-                    <div className='form-group social-input'>
-                        <i className='fab fa-twitter fa-2x' />
-                        <input
-                            type='text'
-                            placeholder='Twitter URL'
-                            name='twitter'
-                            value={twitter}
-                            onChange={e => onChange(e)}
-                        />
-                    </div>
-                    <div className='form-group social-input'>
-                        <i className='fab fa-facebook fa-2x' />
-                        <input
-                            type='text'
-                            placeholder='Facebook URL'
-                            name='facebook'
-                            value={facebook}
-                            onChange={e => onChange(e)}
-                        />
-                    </div>
-                    <div className='form-group social-input'>
-                        <i className='fab fa-youtube fa-2x' />
-                        <input
-                            type='text'
-                            placeholder='YouTube URL'
-                            name='youtube'
-                            value={youtube}
-                            onChange={e => onChange(e)}
-                        />
-                    </div>
-                    <div className='form-group social-input'>
+                       <div className='form-group social-input'>
                         <i className='fab fa-linkedin fa-2x' />
                         <input
                             type='text'
@@ -210,16 +168,7 @@ const EditProfile = ({ profile:{profile, loading}, createProfile, getCurrentProf
                             onChange={e => onChange(e)}
                         />
                     </div>
-                    <div className='form-group social-input'>
-                        <i className='fab fa-instagram fa-2x' />
-                        <input
-                            type='text'
-                            placeholder='Instagram URL'
-                            name='instagram'
-                            value={instagram}
-                            onChange={e => onChange(e)}
-                        />
-                    </div>
+               
                 </Fragment>
             )}
             <input type='submit' className='btn btn-primary my-1' />

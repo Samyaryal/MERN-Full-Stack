@@ -1,18 +1,16 @@
 import React , {Fragment , useEffect}from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import Spinner from '../layout/Spinner';
 import ProfileItem from './ProfileItem';
 import {getProfiles} from '../../actions/profile';
 
-const Profiles = ({getProfiles, profile: {profiles, loading}}) => {
+const Profiles = ({getProfiles, profile: {profiles}}) => {
     useEffect(() => {
         getProfiles();
     }, [getProfiles]);
 
     return (
         <Fragment>
-            {loading ? <Spinner /> : <Fragment>
                 <h1 className="large text-primary">Developers you may want to connect with!</h1>
                 <p className="lead">
                    <i className="fab fa-connector"></i> Browse and connect with developers
@@ -24,8 +22,8 @@ const Profiles = ({getProfiles, profile: {profiles, loading}}) => {
                        ))
                    ) : <h4>No profiles found...</h4>}
                 </div>
-                </Fragment>}
         </Fragment>
+        
     )
 }
 

@@ -3,9 +3,7 @@ import {Link, Redirect } from 'react-router-dom';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import Video from '../../img/Laptop_1_Videvo.mov';
-
 export const Landing = ({isAuthenticated}) => {
-
   if(isAuthenticated){
     return <Redirect to='/dashboard' />
   }
@@ -32,11 +30,9 @@ export const Landing = ({isAuthenticated}) => {
       </section>
     );
 };
-
 Landing.propTypes = {
   isAuthenticated: PropTypes.bool
 }
-
 const mapStateToProps = state => ({
   isAuthenticated: state.auth.isAuthenticated
 })

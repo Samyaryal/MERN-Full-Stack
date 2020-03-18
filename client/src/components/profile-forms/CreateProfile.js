@@ -37,7 +37,7 @@ const CreateProfile = ({createProfile, getCurrentProfile,
             profile.
         </p>
         <small>* = required field</small>
-        <form className='form' onSubmit={e => onSubmit(e)}>
+        <form className='form' onSubmit={onSubmit}>
             <div className='form-group'>
                 <select name='status' value={status} onChange={e => onChange(e)}>
                     <option value='0'>* Select Professional Status</option>

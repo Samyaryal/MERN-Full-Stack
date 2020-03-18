@@ -20,7 +20,7 @@ const Login = ({ login , isAuthenticated }) => {
     return (
       <Fragment>
         <div className="wrapper">
-          <div className="form-wrapper">
+          <div className="form-wrapper-sign">
             <h1 className="large text-primary">Sign In</h1>
             <form className='form' onSubmit={e => onSubmit(e)}>
               <div className='form-group'>

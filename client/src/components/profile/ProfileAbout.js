@@ -2,11 +2,7 @@ import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 
 const ProfileAbout = ({
-  profile: {
-    bio,
-    skills,
-    user: { name }
-  }
+  profile: {bio, skills, user: { name }}
 }) => (
   <div className='profile-about bg-light p-2'>
     {bio && (

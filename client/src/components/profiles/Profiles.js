@@ -3,12 +3,14 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import ProfileItem from './ProfileItem';
 import {getProfiles} from '../../actions/profile';
-const Profiles = ({getProfiles, profile: {profiles}}) => {
+const Profiles = ({getProfiles, profile: {profiles, loading}}) => {
     useEffect(() => {
         getProfiles();
     }, [getProfiles]);
 
     return (
+        <Fragment>
+        {loading ? loading : (
         <Fragment>
                 <h1 className="large text-primary">Developers</h1>
                 <p className="lead">
@@ -23,7 +25,9 @@ const Profiles = ({getProfiles, profile: {profiles}}) => {
                 </div>
             
         </Fragment>
-    )
+    )}
+    </Fragment>
+    );
 }
 Profiles.propTypes = {
     getProfiles: PropTypes.func.isRequired,

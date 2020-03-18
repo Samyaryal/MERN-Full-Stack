@@ -7,13 +7,13 @@ import Experience from './Experience';
 import Education from './Education';
 import {getCurrentProfile, deleteAccount} from '../../actions/profile';
 
-const Dashboard = ({ getCurrentProfile, deleteAccount, auth:{user}, profile:{profile} }) => {
+const Dashboard = ({ getCurrentProfile, deleteAccount, auth:{user}, profile:{profile, loading} }) => {
     useEffect(() => {
         getCurrentProfile();
     }, [getCurrentProfile]);
-    return (
+    return loading && profile === null ? ( loading ):(
          <Fragment>
-        <h1 className="large tex-primary">Dashboard</h1>
+        <h1 className="large text-primary">Dashboard</h1>
         <p className="lead">
         <i className="fas fa-user"></i>Welcome { user && user.name}</p>
         {profile !== null ? (
@@ -34,7 +34,9 @@ const Dashboard = ({ getCurrentProfile, deleteAccount, auth:{user}, profile:{pro
                 <Link to="/create-profile" className="btn btn-primary my-1">Create Profile</Link>
             </Fragment>)}
     </Fragment>
-    );
+    
+    )
+    
 };
 
 Dashboard.propTypes = {

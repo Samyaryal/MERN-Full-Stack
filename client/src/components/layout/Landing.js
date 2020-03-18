@@ -3,7 +3,8 @@ import {Link, Redirect } from 'react-router-dom';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import Video from '../../img/Laptop_1_Videvo.mov';
-export const Landing = ({isAuthenticated}) => {
+
+const Landing = ({isAuthenticated}) => {
   if(isAuthenticated){
     return <Redirect to='/dashboard' />
   }

@@ -240,12 +240,11 @@ img {
 .form .form-group {
   margin: 2% 0;
 }
-/*
 .form .form-text {
   display: block;
   margin-top: 0.3rem;
   color: #888;
-}*/
+}
 .wrapper {
   height: 100vh;
   width: 100%;
@@ -282,22 +281,22 @@ label {
   font-weight: lighter;
 }
 
-/*input {
+input {
   padding: 10px 10px;
   border-radius: 5px;
   outline: none;
   border: 1px solid #cfcfcf;
   padding: 1em;
-}*/
+}
 input::placeholder {
   font-size: 1.2em;
   font-weight: lighter;
   color: #999;
 }
-/*
+
 input.error {
   border: 1px solid red;
-}*/
+}
 
 /*.errorMessage {
   color: red;
@@ -375,19 +374,6 @@ button {
 .form .social-input i {
   padding: 0.5rem;
   width: 4rem;
-}
-
-.form .social-input i.fa-twitter {
-  color: #38a1f3;
-}
-.form .social-input i.fa-facebook {
-  color: #3b5998;
-}
-.form .social-input i.fa-instagram {
-  color: #3f729b;
-}
-.form .social-input i.fa-youtube {
-  color: #c4302b;
 }
 .form .social-input i.fa-linkedin {
   color: #0077b5;
@@ -568,42 +554,6 @@ button {
   flex: 3;
   flex-basis: 20%;
 }
-
-/* Posts Page */
-.post-form .post-form-header {
-  background: var(--primary-color);
-  padding: 0.5rem;
-}
-
-.post {
-  display: grid;
-  grid-template-columns: 1fr 4fr;
-  grid-gap: 2rem;
-  align-items: center;
-}
-
-.post > div:first-child {
-  text-align: center;
-}
-
-.post img {
-  width: 100px;
-}
-
-.post .comment-count {
-  background: var(--light-color);
-  color: var(--primary-color);
-  padding: 0.1rem 0.2rem;
-  border-radius: 5px;
-  font-size: 0.8rem;
-}
-
-.post .post-date {
-  color: #aaa;
-  font-size: 0.8rem;
-  margin-bottom: 0.5rem;
-}
-
 /* Mobile Styles */
 @media (max-width: 700px) {
   .container {
@@ -681,13 +631,5 @@ button {
     display: block;
     width: 100%;
     margin-bottom: 0.2rem;
-  }
-
-  .post {
-    grid-template-columns: 1fr;
-  }
-  .post a,
-  .post button {
-    padding: 0.3rem 0.4rem;
   }
 }

@@ -2,7 +2,6 @@ import { REGISTER_SUCCESS,  USER_LOADED, LOGIN_SUCCESS, LOGOUT, ACCOUNT_DELETED 
 const initialState = {
     token: localStorage.getItem('token'),
     isAuthenticated: null,
-    loading: true,
     user: null
 }
 export default function(state = initialState, action){

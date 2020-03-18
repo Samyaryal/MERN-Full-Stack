@@ -3,35 +3,38 @@ import {Link, withRouter} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {createProfile, getCurrentProfile} from '../../actions/profile';
-
-const EditProfile = ({ profile:{profile, loading}, createProfile, getCurrentProfile, history}) => {
-    const [formData, setFormData] = useState({
-        company: '',
-		website: '',
-		location: '',
-		status: '',
-		skills: '',
-		githubusername: '',
-        bio: '',
-        linkedin:''
-
-    });
+const initialState = {
+    company: '',
+    website: '',
+    location: '',
+    status: '',
+    skills: '',
+    githubusername: '',
+    bio: '',
+    linkedin: ''
+  };
+  const EditProfile = ({
+    profile: { profile, loading },
+    createProfile, getCurrentProfile, 
+    history
+  }) => {
+    const [formData, setFormData] = useState(initialState);
+  
     const [displaySocialInputs, toggleSocialInputs] = useState(false);
-
+  
     useEffect(() => {
-        getCurrentProfile();
-
-        setFormData ({
-            company: loading || !profile.company ? '' : profile.company, //if its loading or there is no profile company then have a blank field. if its not loading and there is profile company then fill it
-            website: loading || !profile.website ? '' : profile.website,
-            location: loading || !profile.location ? '' : profile.location,
-            status: loading || !profile.status ? '' : profile.status,
-            skills: loading || !profile.skills ? '' : profile.skills.join(','),
-            githubusername:loading || !profile.githubusername ? '' : profile.githubusername,
-            bio: loading || !profile.bio ? '' : profile.bio,
-            linkedin: loading || !profile.linkedin ? '':profile.linkedin
-        });
-    }, [loading, getCurrentProfile, profile] );
+      if (!profile) getCurrentProfile();
+      if (!loading) {
+        const profileData = { ...initialState };
+        for (const key in profile) {
+          if (key in profileData) profileData[key] = profile[key];
+        }
+        for (const key in profile.social) {
+          if (key in profileData) profileData[key] = profile.social[key];
+        }
+        setFormData(profileData);
+      }
+    }, [loading, getCurrentProfile, profile]);
 
     const {
         company,

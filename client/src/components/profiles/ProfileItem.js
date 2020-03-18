@@ -1,7 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
-
 const ProfileItem = (
     {profile: {
         user: {_id, name, avatar},
@@ -9,12 +8,11 @@ const ProfileItem = (
         company,
         location,
         skills
-    }
-    
+    }   
 }) => {
     return (
         <div className="profile bg-light">
-            <img scr={avatar} alt=""className="roundd-img"/>
+            <img scr={avatar} alt=""className="round-img"/>
             <div>
                 <h2>{name}</h2>
                 <p>{status}{company && <span> at {company}</span>}</p>

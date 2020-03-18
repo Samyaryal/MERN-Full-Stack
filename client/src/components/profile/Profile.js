@@ -9,21 +9,16 @@ import ProfileEducation from './ProfileEducation';
 import ProfileGithub from './ProfileGithub';
 import { getProfileById } from '../../actions/profile';
 
-const Profile = ({ getProfileById, profile: { profile, loading }, auth, match }) => {
+const Profile = ({ getProfileById, profile: { profile}, auth, match }) => {
+	const nullProfile = !profile;
 	useEffect(() => {
 		getProfileById(match.params.id);
-	}, [getProfileById, match.params.id]);
+	}, [getProfileById, match.params.id, nullProfile]);
 	return (
-		<Fragment>
-			{profile === null || loading ? " loading" :(
-				<Fragment>
-					<Link to="/profiles" className="btn btn-light">
-						Back To Profiles
-					</Link>
+			    <Fragment>
+					<Link to="/profiles" className="btn btn-light">Back To Profiles</Link>
 					{auth.isAuthenticated && auth.loading === false && auth.user._id === profile.user._id && (
-						<Link to="/edit-profile" className="btn btn-dark">
-							Edit Profile
-						</Link>
+						<Link to="/edit-profile" className="btn btn-dark">Edit Profile</Link>
 					)}
 					<div className="profile-grid my-1">
 						<ProfileTop profile={profile} />
@@ -49,17 +44,13 @@ const Profile = ({ getProfileById, profile: { profile, loading }, auth, match })
 									))}
 								</Fragment>
 							) : (
-								<h4>No experience credentials</h4>
+								<h4>No education credentials</h4>
 							)}
 						</div>
 						{profile.githubusername && <ProfileGithub username={profile.githubusername} />}
 					</div>
 				</Fragment>
-			)}
-			
-		</Fragment>
-	);
-};
+			 )}
 
 Profile.propTypes = {
 	getProfileById: PropTypes.func.isRequired,

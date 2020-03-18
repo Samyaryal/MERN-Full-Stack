@@ -19,13 +19,15 @@ import store from './store';
 import { loadUser } from './actions/auth';
 import setAuthToken  from './utils/setAuthToken';
 import './App.css';
-
 if(localStorage.token){
   setAuthToken(localStorage.token);
 }
 const App = () => { 
   useEffect(() => {
+    if(localStorage.token){
+      setAuthToken(localStorage.token);
     store.dispatch(loadUser()); //we have access to the store and called dispatch is a method on a store and pass in loadUser.
+    } 
   }, []); // this helps it to run only once, same as componentdidMount
   return (
   <Provider store = {store}>

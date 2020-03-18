@@ -13,14 +13,12 @@ router.get('/me', auth, async (req, res) => {
     try {
         const profile = await Profile.findOne({
             user: req.user.id
-        }).populate('user',
-            ['name', 'avatar']);
+        });
         if (!profile) {
-            return res.status(400).json({
-                msg: 'There is no profile for this user'
-            });
+            return res.status(400).json({msg: 'There is no profile for this user'});
         }
-        res.json(profile);
+        //only populate from the user document if exists.
+        res.json(profile.populate('user',['name', 'avatar']));
     } catch (err) {
         console.error(err.message);
         res.status(500).send('Server Error');
@@ -52,41 +50,36 @@ router.post(
             website,
             location,
             bio,
+            skills,
             status,
             githubusername,
-            skills,
             linkedin
         } = req.body;
         //build profile object
-        const profileFields = {};
-        profileFields.user = req.user.id;
-        if(company) profileFields.company = company;
-        if(website) profileFields.website = website;
-        if(location) profileFields.location = location;
-        if(bio) profileFields.bio = bio;
-        if(status) profileFields.status = status;
-        if(githubusername) profileFields.githubusername = githubusername;
-        if(skills){
-            profileFields.skills = skills.split(',').map(skill => skill.trim());
-        }
+        const profileFields = { user: req.user.id, company, location,
+        website: website ==='' ? '' : normalize(website, {forceHttps: true}),
+        bio,
+        skills: Array.isArray(skills)
+        ? skills
+        : skills.split(',').map(skill =>'' + skill.trim()),
+        status,
+        githubusername
+    };
         //build social object 
-        profileFields.social = {}
-        if(linkedin) profileFields.social.linkedin= linkedin;       
+        const socialfields = {linkedin};
+        for(const [key, value] of Object.entries(socialfields)){
+            if(value.length > 0)
+            socialfields[key] = normalize(value, {forceHttps: true});
+        }
+        profileFields.social = socialfields;   
         try{
-            let profile = await Profile.findOne({user: req.user.id});
-            if(profile){
-                //update 
+            let profile = await Profile.findOneAndUpdate 
                 profile = await Profile.findOneAndUpdate(
                     {user: req.user.id}, 
                     {$set: profileFields},
-                    {new: true}
+                    {new: true, upsert: true}
                 );
                 return res.json(profile);
-            }
-            //create
-            profile = new Profile (profileFields);
-            await profile.save();
-            res.json(profile);
         }catch (err){
             console.error(err.message);
             res.status(500).send('Server Error')
@@ -99,8 +92,7 @@ router.post(
 router.get ('/', async (req, res)=>{
     try {
         const profiles = await Profile.find().populate('user', ['name', 'avatar']);
-        res.json(profiles);
-        
+        res.json(profiles);      
     } catch (err) {
         console.error(err.message);
         res.status(500).send('Server Error')       
@@ -113,7 +105,7 @@ router.get ('/user/:user_id' ,async (req, res)=>{
     try {
         const profile = await Profile.findOne({user: req.params.user_id}).populate('user', ['name', 'avatar']);
         if(!profile) 
-            return res.status(400).json({msg: 'Profile not fouund'});
+            return res.status(400).json({msg: 'There is no profile for this user'});
         res.json(profile);        
     } catch (err) {
         console.error(err.message);
@@ -124,7 +116,7 @@ router.get ('/user/:user_id' ,async (req, res)=>{
     }
 });
 // delete api/profile
-// delete profile, user and post 
+// delete profile, user
 // Private
 router.delete ('/', auth, async (req, res)=>{
     try {

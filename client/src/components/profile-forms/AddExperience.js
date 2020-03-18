@@ -17,7 +17,7 @@ const AddExperience = ({addExperience, history }) => {
       });
       const [toDateDisabled, toggleDisabled] = useState(false);
 
-      const { company, title, location, from, to, current, description } = formData;
+      const { company, title, from, to, current, description } = formData;
 
       const onChange = e =>
       setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -55,15 +55,6 @@ const AddExperience = ({addExperience, history }) => {
             value={company}
             onChange={e => onChange(e)}
             required
-          />
-        </div>
-        <div className='form-group'>
-          <input
-            type='text'
-            placeholder='Location'
-            name='location'
-            value={location}
-            onChange={e => onChange(e)}
           />
         </div>
         <div className='form-group'>
@@ -118,9 +109,7 @@ const AddExperience = ({addExperience, history }) => {
     </Fragment>
     )
 }
-
 AddExperience.propTypes = {
-    addExperience: PropTypes.func.isRequired,
+    addExperience: PropTypes.func.isRequired
 }
-
 export default connect (null, {addExperience})(withRouter(AddExperience));

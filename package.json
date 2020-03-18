@@ -30,5 +30,4 @@
     "nodemon": "^2.0.2 -signal SIGTERM --delay 1500ms",
     "prettier": "^1.19.1"
   }
-  
 }

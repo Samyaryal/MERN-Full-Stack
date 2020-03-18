@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import ProfileItem from './ProfileItem';
 import {getProfiles} from '../../actions/profile';
-
 const Profiles = ({getProfiles, profile: {profiles}}) => {
     useEffect(() => {
         getProfiles();
@@ -11,7 +10,7 @@ const Profiles = ({getProfiles, profile: {profiles}}) => {
 
     return (
         <Fragment>
-                <h1 className="large text-primary">Developers you may want to connect with!</h1>
+                <h1 className="large text-primary">Developers</h1>
                 <p className="lead">
                    <i className="fab fa-connector"></i> Browse and connect with developers
                 </p>
@@ -22,18 +21,15 @@ const Profiles = ({getProfiles, profile: {profiles}}) => {
                        ))
                    ) : <h4>No profiles found...</h4>}
                 </div>
+            
         </Fragment>
-        
     )
 }
-
 Profiles.propTypes = {
     getProfiles: PropTypes.func.isRequired,
     profile: PropTypes.object.isRequired
 };
-
 const mapStateToProps = state => ({
     profile: state.profile
 })
-
 export default connect(mapStateToProps, {getProfiles})(Profiles);
